@@ -1,27 +1,38 @@
-# Laf AI – Content Generator 🚀
+# Laf AI – Global Content Generator 🇯🇵
 
-## 📌 Description
-Laf AI is an AI-based content generator that helps businesses create platform-specific content and adapt it for global and Japanese markets.
+## 📌 Overview
+Laf AI is an AI-based content generation tool designed to help small businesses create engaging social media content and adapt it for international audiences, especially Japan.
+
+## 🚀 Problem
+Small businesses struggle to:
+- Generate consistent social media content
+- Adapt content for different platforms
+- Understand cultural differences (e.g., Japan)
+
+## 💡 Solution
+Laf AI generates:
+- Multiple captions
+- Hashtags
+- Content ideas
+
+And includes a **Japan Mode 🇯🇵** that adapts tone to match Japanese communication style.
 
 ## ✨ Features
 - Multi-caption generation
 - Hashtag suggestions
 - Content ideas
-- Japan Mode 🇯🇵 (cultural adaptation)
+- Japan Mode (cultural adaptation)
 - Dynamic regenerate feature
-- Strategy tips for businesses
+- Strategy tips for growth
 
 ## 🛠️ Tech Stack
 - Python (Flask)
 - HTML/CSS
 
-## 🎯 Purpose
-This project was built to help businesses generate engaging content and improve their digital presence across platforms like Instagram and YouTube.
+## 🎯 Impact
+This tool helps businesses expand globally by creating localized and culturally relevant content.
 
-## 🌏 Special Feature
-Japan Mode adapts content tone to align with Japanese cultural communication style.
-
-## 🚀 How to Run
-1. Install Flask
-2. Run `python app.py`
-3. Open `http://127.0.0.1:5000`
+## ▶️ How to Run
+1. Install Flask  
+2. Run: `python app.py`  
+3. Open: http://127.0.0.1:5000
