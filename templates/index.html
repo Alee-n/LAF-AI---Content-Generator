@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Laf AI</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial;
+            text-align: center;
+            margin-top: 40px;
+
+            background: linear-gradient(
+                135deg,
+                #fff5f5,
+                #ffeaea,
+                #ffffff
+            );
+
+            transition: 0.4s;
+        }
+
+        /* DARK MODE */
+
+        body.dark-mode {
+
+            background: linear-gradient(
+                135deg,
+                #1a1a1a,
+                #121212,
+                #222
+            );
+
+            color: white;
+        }
+
+        body.dark-mode .box {
+
+            background-color: #2b2b2b;
+
+            color: white;
+
+            border: 1px solid #444;
+        }
+
+        body.dark-mode .history-box {
+
+            background-color: #333;
+
+            color: white;
+        }
+
+        body.dark-mode button {
+
+            background-color: #444;
+        }
+
+        body.dark-mode h1 {
+
+            color: #ff9999;
+        }
+
+        body.dark-mode h3 {
+
+            color: #ddd;
+        }
+
+        h1 {
+
+            color: #b30000;
+        }
+
+        h3 {
+
+            color: #444;
+        }
+
+        select, button {
+
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        button {
+
+            background-color: #b30000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+
+            background-color: #800000;
+        }
+
+        .box {
+
+            border: 1px solid #eee;
+
+            padding: 20px;
+
+            margin: 20px auto;
+
+            width: 65%;
+
+            border-radius: 12px;
+
+            background-color: white;
+
+            box-shadow:
+                0px 4px 12px rgba(0,0,0,0.08);
+
+            transition: 0.4s;
+        }
+
+        .divider {
+
+            width: 60%;
+
+            margin: 25px auto;
+
+            height: 2px;
+
+            background: #ffcccc;
+        }
+
+        .history-box {
+
+            border: 1px dashed #bbb;
+
+            margin: 15px auto;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            width: 80%;
+
+            background-color: #fafafa;
+
+            transition: 0.4s;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- DARK MODE BUTTON -->
+
+    <button onclick="toggleDarkMode()">
+
+        🌙 Toggle Dark Mode
+
+    </button>
+
+    <h1>
+        🇯🇵 Laf AI - Content Generator
+    </h1>
+
+    <h3>
+        AI-Powered Content Generator
+        for Global & Japanese Markets
+    </h3>
+
+    <p style="color: gray;">
+
+        Generate dynamic captions,
+        hashtags, and marketing ideas.
+
+    </p>
+
+    <div class="divider"></div>
+
+    {% if error %}
+
+        <p style="color:red;">
+            {{ error }}
+        </p>
+
+    {% endif %}
+
+    <!-- FORM -->
+
+    <form method="POST">
+
+        <!-- BUSINESS -->
+
+        <label>Business Type:</label>
+
+        <select name="business">
+
+            <option value="bakery"
+            {% if business=="bakery" %}selected{% endif %}>
+            Bakery
+            </option>
+
+            <option value="restaurant"
+            {% if business=="restaurant" %}selected{% endif %}>
+            Restaurant
+            </option>
+
+            <option value="travel"
+            {% if business=="travel" %}selected{% endif %}>
+            Travel
+            </option>
+
+            <option value="convenience store"
+            {% if business=="convenience store" %}selected{% endif %}>
+            Convenience Store
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <!-- PLATFORM -->
+
+        <label>Platform:</label>
+
+        <select name="platform">
+
+            <option
+            {% if platform=="Instagram" %}selected{% endif %}>
+            Instagram
+            </option>
+
+            <option
+            {% if platform=="YouTube" %}selected{% endif %}>
+            YouTube
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <!-- TONE -->
+
+        <label>Tone:</label>
+
+        <select name="tone">
+
+            <option
+            {% if tone=="Casual" %}selected{% endif %}>
+            Casual
+            </option>
+
+            <option
+            {% if tone=="Professional" %}selected{% endif %}>
+            Professional
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <!-- MARKET -->
+
+        <label>Target Market:</label>
+
+        <select name="market">
+
+            <option
+            {% if market=="Global" %}selected{% endif %}>
+            Global
+            </option>
+
+            <option
+            {% if market=="Japan" %}selected{% endif %}>
+            Japan
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            Generate
+        </button>
+
+    </form>
+
+    {% if result %}
+
+    <div class="divider"></div>
+
+    <!-- CAPTIONS -->
+
+    <div class="box">
+
+        <h2>📢 Captions</h2>
+
+        <div id="captionsBox">
+
+            {% for c in result.captions %}
+                <p>{{ c }}</p>
+            {% endfor %}
+
+        </div>
+
+        <button onclick="copyText('captionsBox')">
+            Copy Captions
+        </button>
+
+    </div>
+
+    <!-- HASHTAGS -->
+
+    <div class="box">
+
+        <h2>🏷️ Hashtags</h2>
+
+        <div id="hashtagsBox">
+
+            {% for h in result.hashtags %}
+                <p>{{ h }}</p>
+            {% endfor %}
+
+        </div>
+
+        <button onclick="copyText('hashtagsBox')">
+            Copy Hashtags
+        </button>
+
+    </div>
+
+    <!-- IDEAS -->
+
+    <div class="box">
+
+        <h2>💡 Ideas</h2>
+
+        <div id="ideasBox">
+
+            {% for i in result.ideas %}
+                <p>{{ i }}</p>
+            {% endfor %}
+
+        </div>
+
+        <button onclick="copyText('ideasBox')">
+            Copy Ideas
+        </button>
+
+    </div>
+
+    <!-- STRATEGY -->
+
+    <div class="box">
+
+        <h2>📊 Strategy Tips</h2>
+
+        <p>
+            Best time to post:
+            Evening (6–9 PM)
+        </p>
+
+        <p>
+            Use reels and shorts
+            for better engagement 📈
+        </p>
+
+    </div>
+
+    <!-- PLATFORM -->
+
+    <div class="box">
+
+        <h2>📱 Platform Tips</h2>
+
+        <p>{{ platform_tip }}</p>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <form method="POST">
+
+        <input type="hidden"
+        name="business"
+        value="{{ business }}">
+
+        <input type="hidden"
+        name="platform"
+        value="{{ platform }}">
+
+        <input type="hidden"
+        name="tone"
+        value="{{ tone }}">
+
+        <input type="hidden"
+        name="market"
+        value="{{ market }}">
+
+        <button type="submit">
+            🔄 Regenerate
+        </button>
+
+        <br><br>
+
+        <button
+        type="button"
+        onclick="downloadContent()">
+
+            ⬇ Download Content
+
+        </button>
+
+    </form>
+
+    {% endif %}
+
+    <!-- HISTORY -->
+
+    {% if history %}
+
+    <div class="box">
+
+        <h2>
+            🕘 Recent Generations
+        </h2>
+
+        {% for item in history %}
+
+        <div class="history-box">
+
+            <h3>
+                {{ item.business|title }}
+            </h3>
+
+            {% for caption in item.captions %}
+
+                <p>{{ caption }}</p>
+
+            {% endfor %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+    // RESTORE DARK MODE
+
+    window.onload = function () {
+
+        if (
+            localStorage.getItem("darkMode")
+            === "enabled"
+        ) {
+
+            document.body.classList.add(
+                "dark-mode"
+            );
+
+        }
+
+    };
+
+    // TOGGLE DARK MODE
+
+    function toggleDarkMode() {
+
+        document.body.classList.toggle(
+            "dark-mode"
+        );
+
+        if (
+            document.body.classList.contains(
+                "dark-mode"
+            )
+        ) {
+
+            localStorage.setItem(
+                "darkMode",
+                "enabled"
+            );
+
+        }
+
+        else {
+
+            localStorage.setItem(
+                "darkMode",
+                "disabled"
+            );
+
+        }
+
+    }
+
+    // COPY FUNCTION
+
+    function copyText(id) {
+
+        let text =
+
+            document.getElementById(id)
+            .innerText;
+
+        navigator.clipboard.writeText(text);
+
+        alert("Copied successfully!");
+
+    }
+
+    // DOWNLOAD FUNCTION
+
+    function downloadContent() {
+
+        let captions =
+
+            document.getElementById(
+                "captionsBox"
+            ).innerText;
+
+        let hashtags =
+
+            document.getElementById(
+                "hashtagsBox"
+            ).innerText;
+
+        let ideas =
+
+            document.getElementById(
+                "ideasBox"
+            ).innerText;
+
+        let fullContent =
+
+            "=== LAF AI GENERATED CONTENT ===\n\n" +
+
+            "CAPTIONS:\n" +
+            captions +
+
+            "\n\nHASHTAGS:\n" +
+            hashtags +
+
+            "\n\nIDEAS:\n" +
+            ideas;
+
+        let blob = new Blob(
+
+            [fullContent],
+
+            { type: "text/plain" }
+
+        );
+
+        let link =
+
+            document.createElement("a");
+
+        link.href =
+
+            URL.createObjectURL(blob);
+
+        link.download =
+
+            "laf_ai_content.txt";
+
+        link.click();
+
+    }
+
+    </script>
+
+</body>
+</html>
