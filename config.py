@@ -1,8 +1,12 @@
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class Config:
 
     SECRET_KEY = os.getenv("SECRET_KEY", "laf_ai_secret")
 
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+    OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")

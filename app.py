@@ -6,7 +6,7 @@ from content_engine import generate_dynamic_content, process_content
 
 from analytics import initialize_analytics, update_analytics
 
-from ai_engine import generate_ai_content
+from ai_engine import generate_ai_content, parse_ai_response
 
 app = Flask(__name__)
 
@@ -49,6 +49,8 @@ def home():
 
     emotion = "Exciting"
 
+    ai_mode = "Creative"
+
     platform_tip = ""
 
     # FORM SUBMISSION
@@ -73,6 +75,8 @@ def home():
 
         emotion = request.form.get("emotion")
 
+        ai_mode = request.form.get("ai_mode")
+
         # VALIDATION
 
         if not business:
@@ -81,22 +85,25 @@ def home():
 
         else:
 
-            # GENERATE CONTENT
+            # AI GENERATION + PARSING
 
-            result = generate_dynamic_content(business)
+            try:
 
-            # PROCESS PERSONALIZATION
+                ai_text = generate_ai_content(
+                    business, audience, emotion, season, language, ai_mode
+                )
 
-            result = process_content(result, language, audience, season, emotion)
+                ai_result = parse_ai_response(ai_text)
 
-            # OPTIONAL AI PREVIEW
-            # (FOR FUTURE GEMINI INTEGRATION)
+                result = ai_result
 
-            ai_preview = generate_ai_content(
-                business, audience, emotion, season, language
-            )
+            except:
 
-            print(ai_preview)
+                # FALLBACK GENERATION
+
+                result = generate_dynamic_content(business)
+
+                result = process_content(result, language, audience, season, emotion)
 
             # PLATFORM TIPS
 
@@ -142,6 +149,7 @@ def home():
         audience=audience,
         season=season,
         emotion=emotion,
+        ai_mode=ai_mode,
         platform_tip=platform_tip,
         history=session.get("history", []),
         generation_count=session.get("generation_count", 0),
