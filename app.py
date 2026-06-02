@@ -14,6 +14,8 @@ from services.validation_service import (validate_business,validate_ai_mode,vali
 
 from services.logging_service import log_generation, log_error, log_provider
 
+from services.response_validation_service import ResponseValidator
+
 app = Flask(__name__)
 
 # CONFIGURATION
@@ -102,6 +104,10 @@ def home():
                 )
 
                 ai_result = parse_ai_response(ai_text)
+
+                if not ResponseValidator.validate(ai_result):
+
+                    raise ValueError("Invalid AI response structure")
 
                 result = ai_result.to_dict()
 
