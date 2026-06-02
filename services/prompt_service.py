@@ -1,7 +1,21 @@
 class PromptService:
 
     @staticmethod
-    def build_content_prompt(business, audience, emotion, season, language, ai_mode):
+    def build_content_prompt(
+
+        business,
+
+        audience,
+
+        emotion,
+
+        season,
+
+        language,
+
+        ai_mode
+
+    ):
 
         return f"""
 

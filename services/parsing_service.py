@@ -4,53 +4,39 @@ from schemas.content_schema import ContentResponse
 def parse_ai_response(response_text):
 
     captions = []
-
     hashtags = []
-
     ideas = []
 
     current_section = None
 
-    lines = response_text.split("\n")
-
-    for line in lines:
+    for line in response_text.splitlines():
 
         clean = line.strip()
 
         if not clean:
-
             continue
 
         lower = clean.lower()
 
-        if "caption" in lower:
-
+        if lower.startswith("captions"):
             current_section = "captions"
-
             continue
 
-        elif "hashtag" in lower:
-
+        elif lower.startswith("hashtags"):
             current_section = "hashtags"
-
             continue
 
-        elif "idea" in lower:
-
+        elif lower.startswith("ideas"):
             current_section = "ideas"
-
             continue
 
-        if current_section == ("captions"):
-
+        if current_section == "captions":
             captions.append(clean)
 
-        elif current_section == ("hashtags"):
-
+        elif current_section == "hashtags":
             hashtags.append(clean)
 
-        elif current_section == ("ideas"):
-
+        elif current_section == "ideas":
             ideas.append(clean)
 
-    return ContentResponse(captions, hashtags, ideas)
+    return ContentResponse(captions=captions, hashtags=hashtags, ideas=ideas)

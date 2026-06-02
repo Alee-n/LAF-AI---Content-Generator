@@ -21,4 +21,6 @@ def validate_ai_mode(ai_mode):
 
 def validate_language(language):
 
-    return language in ALLOWED_LANGUAGES
+    valid_languages = ["English", "Japanese Style"]
+
+    return language in valid_languages
