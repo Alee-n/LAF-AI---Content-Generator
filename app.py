@@ -6,7 +6,11 @@ from content_engine import generate_dynamic_content, process_content
 
 from analytics import initialize_analytics, update_analytics
 
-from ai_engine import generate_ai_content, parse_ai_response
+from ai_engine import generate_ai_content
+
+from services.parsing_service import parse_ai_response
+
+from services.validation_service import (validate_business,validate_ai_mode,validate_language)
 
 app = Flask(__name__)
 
@@ -61,6 +65,8 @@ def home():
 
         business = request.form.get("business")
 
+        print("Business received:", business)
+
         platform = request.form.get("platform")
 
         tone = request.form.get("tone")
@@ -79,9 +85,8 @@ def home():
 
         # VALIDATION
 
-        if not business:
-
-            error = "Please select a business type."
+        if not validate_business(business):
+            error = ("Invalid business type.")
 
         else:
 
@@ -95,7 +100,7 @@ def home():
 
                 ai_result = parse_ai_response(ai_text)
 
-                result = ai_result
+                result = ai_result.to_dict()
 
             except:
 
