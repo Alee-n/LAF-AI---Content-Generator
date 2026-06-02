@@ -24,313 +24,229 @@
 
     </button>
 
-    <h1>
-        🇯🇵 Laf AI - Content Generator
-    </h1>
+    <header class="hero">
 
-    <h3>
-        AI-Powered Adaptive Marketing
-        Content System
-    </h3>
+        <nav class="navbar">
 
-    <p style="color: gray;">
+            <div class="logo">
+                LAF AI
+            </div>
 
-        Generate intelligent captions,
-        hashtags, and marketing ideas.
+            <button
+                onclick="toggleDarkMode()"
+                class="theme-btn"
+            >
+                🌙
+            </button>
 
-    </p>
+        </nav>
 
-    <div class="divider"></div>
+        <div class="container">
 
-    {% if error %}
-
-    <p style="color:red;">
-        {{ error }}
-    </p>
-
-    {% endif %}
-
-    <!-- MAIN FORM -->
-
-    <form method="POST">
-
-        <!-- BUSINESS -->
-
-        <label>
-            Business Type:
-        </label>
-
-        <select name="business">
-
-            <option value="bakery" {% if business=="bakery" %} selected {% endif %}>
-
-                Bakery
-
-            </option>
-
-            <option value="restaurant" {% if business=="restaurant" %} selected {% endif %}>
-
-                Restaurant
-
-            </option>
-
-            <option value="travel" {% if business=="travel" %} selected {% endif %}>
-
-                Travel
-
-            </option>
-
-            <option value="convenience store" {% if business=="convenience store" %} selected {% endif %}>
-
-                Convenience Store
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- PLATFORM -->
-
-        <label>
-            Platform:
-        </label>
-
-        <select name="platform">
-
-            <option {% if platform=="Instagram" %} selected {% endif %}>
-
-                Instagram
-
-            </option>
-
-            <option {% if platform=="YouTube" %} selected {% endif %}>
-
-                YouTube
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- TONE -->
-
-        <label>
-            Tone:
-        </label>
-
-        <select name="tone">
-
-            <option {% if tone=="Casual" %} selected {% endif %}>
-
-                Casual
-
-            </option>
-
-            <option {% if tone=="Professional" %} selected {% endif %}>
-
-                Professional
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <div class="form-group">
-
-            <label>
-                AI Generation Mode
-            </label>
-
-            <select name="ai_mode">
-
-                <option value="Creative">
-                    Creative
-                </option>
-
-                <option value="Professional">
-                    Professional
-                </option>
-
-                <option value="Minimal">
-                    Minimal
-                </option>
-
-                <option value="Viral">
-                    Viral
-                </option>
-
-            </select>
-
+            <div class="dashboard">
+        
+                <!-- GENERATOR -->
+        
+                <div class="generator-card">
+        
+                    <h2>
+                        Content Generator
+                    </h2>
+        
+                    <p class="card-subtitle">
+                        Generate AI-powered captions, hashtags,
+                        and content ideas.
+                    </p>
+        
+                    {% if error %}
+        
+                    <p class="error-text">
+                        {{ error }}
+                    </p>
+        
+                    {% endif %}
+        
+                    <form method="POST">
+        
+                        <div class="form-group">
+        
+                            <label>
+                                Business Type
+                            </label>
+        
+                            <select name="business">
+        
+                                <option value="bakery" {% if business=="bakery" %} selected {% endif %}>
+                                    Bakery
+                                </option>
+        
+                                <option value="restaurant" {% if business=="restaurant" %} selected {% endif %}>
+                                    Restaurant
+                                </option>
+        
+                                <option value="travel" {% if business=="travel" %} selected {% endif %}>
+                                    Travel
+                                </option>
+        
+                                <option value="convenience store" {% if business=="convenience store" %} selected {% endif %}>
+                                    Convenience Store
+                                </option>
+        
+                            </select>
+        
+                        </div>
+        
+                        <div class="form-group">
+        
+                            <label>
+                                AI Mode
+                            </label>
+        
+                            <select name="ai_mode">
+        
+                                <option value="Creative">
+                                    Creative
+                                </option>
+        
+                                <option value="Professional">
+                                    Professional
+                                </option>
+        
+                                <option value="Minimal">
+                                    Minimal
+                                </option>
+        
+                                <option value="Viral">
+                                    Viral
+                                </option>
+        
+                            </select>
+        
+                        </div>
+        
+                        <div class="form-group">
+        
+                            <label>
+                                Language
+                            </label>
+        
+                            <select name="language">
+        
+                                <option {% if language=="English" %} selected {% endif %}>
+                                    English
+                                </option>
+        
+                                <option {% if language=="Japanese Style" %} selected {% endif %}>
+                                    Japanese Style
+                                </option>
+        
+                            </select>
+        
+                        </div>
+        
+                        <div class="form-group">
+        
+                            <label>
+                                Audience
+                            </label>
+        
+                            <select name="audience">
+        
+                                <option {% if audience=="Students" %} selected {% endif %}>
+                                    Students
+                                </option>
+        
+                                <option {% if audience=="Professionals" %} selected {% endif %}>
+                                    Professionals
+                                </option>
+        
+                                <option {% if audience=="Tourists" %} selected {% endif %}>
+                                    Tourists
+                                </option>
+        
+                                <option {% if audience=="Families" %} selected {% endif %}>
+                                    Families
+                                </option>
+        
+                            </select>
+        
+                        </div>
+        
+                        <button
+                            type="submit"
+                            id="generateBtn"
+                            class="generate-btn"
+                        >
+        
+                            Generate Content
+        
+                        </button>
+        
+                    </form>
+        
+                </div>
+        
+                <!-- ANALYTICS -->
+        
+                <div class="analytics-card">
+        
+                    <h2>
+                        Usage Analytics
+                    </h2>
+        
+                    <div class="stat">
+        
+                        <span>
+                            Total Generations
+                        </span>
+        
+                        <strong>
+                            {{ generation_count }}
+                        </strong>
+        
+                    </div>
+        
+                    <div class="stat">
+        
+                        <span>
+                            Business
+                        </span>
+        
+                        <strong>
+                            {{ business|title }}
+                        </strong>
+        
+                    </div>
+        
+                    <div class="stat">
+        
+                        <span>
+                            Audience
+                        </span>
+        
+                        <strong>
+                            {{ audience }}
+                        </strong>
+        
+                    </div>
+        
+                    <div class="stat">
+        
+                        <span>
+                            AI Mode
+                        </span>
+        
+                        <strong>
+                            {{ ai_mode }}
+                        </strong>
+        
+                    </div>
+        
+                </div>
+        
+            </div>
+        
         </div>
-
-        <!-- MARKET -->
-
-        <label>
-            Target Market:
-        </label>
-
-        <select name="market">
-
-            <option {% if market=="Global" %} selected {% endif %}>
-
-                Global
-
-            </option>
-
-            <option {% if market=="Japan" %} selected {% endif %}>
-
-                Japan
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- LANGUAGE -->
-
-        <label>
-            Language Style:
-        </label>
-
-        <select name="language">
-
-            <option {% if language=="English" %} selected {% endif %}>
-
-                English
-
-            </option>
-
-            <option {% if language=="Japanese Style" %} selected {% endif %}>
-
-                Japanese Style
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- AUDIENCE -->
-
-        <label>
-            Target Audience:
-        </label>
-
-        <select name="audience">
-
-            <option {% if audience=="Students" %} selected {% endif %}>
-
-                Students
-
-            </option>
-
-            <option {% if audience=="Professionals" %} selected {% endif %}>
-
-                Professionals
-
-            </option>
-
-            <option {% if audience=="Tourists" %} selected {% endif %}>
-
-                Tourists
-
-            </option>
-
-            <option {% if audience=="Families" %} selected {% endif %}>
-
-                Families
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- SEASON -->
-
-        <label>
-            Season:
-        </label>
-
-        <select name="season">
-
-            <option {% if season=="Summer" %} selected {% endif %}>
-
-                Summer
-
-            </option>
-
-            <option {% if season=="Winter" %} selected {% endif %}>
-
-                Winter
-
-            </option>
-
-            <option {% if season=="Spring" %} selected {% endif %}>
-
-                Spring
-
-            </option>
-
-            <option {% if season=="Autumn" %} selected {% endif %}>
-
-                Autumn
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- EMOTION -->
-
-        <label>
-            Emotion:
-        </label>
-
-        <select name="emotion">
-
-            <option {% if emotion=="Exciting" %} selected {% endif %}>
-
-                Exciting
-
-            </option>
-
-            <option {% if emotion=="Calm" %} selected {% endif %}>
-
-                Calm
-
-            </option>
-
-            <option {% if emotion=="Luxury" %} selected {% endif %}>
-
-                Luxury
-
-            </option>
-
-            <option {% if emotion=="Friendly" %} selected {% endif %}>
-
-                Friendly
-
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <!-- GENERATE BUTTON -->
-
-        <button type="submit" id="generateBtn">
-
-            Generate
-
-        </button>
-
-    </form>
 
     <!-- LOADER -->
 
@@ -340,9 +256,11 @@
 
     </div>
 
-    {% if result %}
+    <h2 class="section-title">
+        Generated Content
+    </h2>
 
-    <div class="divider"></div>
+    {% if result %}
 
     <!-- CAPTIONS -->
 
@@ -425,75 +343,6 @@
             Copy Ideas
 
         </button>
-
-    </div>
-
-    <!-- STRATEGY -->
-
-    <div class="box">
-
-        <h2>
-            📊 Strategy Tips
-        </h2>
-
-        <p>
-            Best time to post:
-            Evening (6–9 PM)
-        </p>
-
-        <p>
-            Use reels and shorts
-            for better engagement 📈
-        </p>
-
-    </div>
-
-    <!-- PLATFORM -->
-
-    <div class="box">
-
-        <h2>
-            📱 Platform Tips
-        </h2>
-
-        <p>
-            {{ platform_tip }}
-        </p>
-
-    </div>
-
-    <!-- ANALYTICS -->
-
-    <div class="box">
-
-        <h2>
-            📊 Analytics Dashboard
-        </h2>
-
-        <p>
-            Total Generations:
-            {{ generation_count }}
-        </p>
-
-        <p>
-            Current Platform:
-            {{ platform }}
-        </p>
-
-        <p>
-            Current Audience:
-            {{ audience }}
-        </p>
-
-        <p>
-            Current Emotion:
-            {{ emotion }}
-        </p>
-
-        <p>
-            Current Business:
-            {{ business|title }}
-        </p>
 
     </div>
 

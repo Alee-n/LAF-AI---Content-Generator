@@ -5,3 +5,7 @@
 2026-06-02 13:31:38,170 | ERROR | Error | Error code: 404 - {'error': {'message': 'No endpoints found for deepseek/deepseek-chat-v3-0324:free.', 'code': 404}, 'user_id': 'user_2yXpM91ORMk2OPXnad3Yikiy6J7'}
 2026-06-02 13:37:42,176 | INFO | Generation | Business=bakery | Mode=Creative
 2026-06-02 13:37:43,789 | ERROR | Error | Error code: 404 - {'error': {'message': 'No endpoints found for deepseek/deepseek-chat-v3-0324:free.', 'code': 404}, 'user_id': 'user_2yXpM91ORMk2OPXnad3Yikiy6J7'}
+2026-06-02 13:58:37,148 | INFO | Generation | Business=bakery | Mode=Minimal
+2026-06-02 13:58:39,908 | ERROR | Error | Error code: 404 - {'error': {'message': 'No endpoints found for deepseek/deepseek-chat-v3-0324:free.', 'code': 404}, 'user_id': 'user_2yXpM91ORMk2OPXnad3Yikiy6J7'}
+2026-06-02 15:22:51,121 | INFO | Generation | Business=travel | Mode=Minimal
+2026-06-02 15:22:53,042 | ERROR | Error | Error code: 404 - {'error': {'message': 'No endpoints found for deepseek/deepseek-chat-v3-0324:free.', 'code': 404}, 'user_id': 'user_2yXpM91ORMk2OPXnad3Yikiy6J7'}
