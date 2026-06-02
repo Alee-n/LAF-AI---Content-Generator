@@ -12,6 +12,8 @@ from services.parsing_service import parse_ai_response
 
 from services.validation_service import (validate_business,validate_ai_mode,validate_language)
 
+from services.logging_service import log_generation, log_error, log_provider
+
 app = Flask(__name__)
 
 # CONFIGURATION
@@ -94,6 +96,7 @@ def home():
 
             try:
 
+                log_generation(business, ai_mode)
                 ai_text = generate_ai_content(
                     business, audience, emotion, season, language, ai_mode
                 )
@@ -102,7 +105,9 @@ def home():
 
                 result = ai_result.to_dict()
 
-            except:
+            except Exception as e:
+
+                log_error(str(e))
 
                 # FALLBACK GENERATION
 
@@ -164,5 +169,8 @@ def home():
 # RUN APPLICATION
 
 if __name__ == "__main__":
+    print("BEFORE RUN")
 
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=False)
+
+    print("AFTER RUN")

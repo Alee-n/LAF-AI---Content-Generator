@@ -1,97 +1,40 @@
-from openai import OpenAI
-
-from config import Config
-
-# OPENROUTER CLIENT
-
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1", api_key=Config.OPENROUTER_API_KEY
-)
-
-
-# AI CONTENT GENERATION
+from services.ai_service import AIService
 
 
 def generate_ai_content(business, audience, emotion, season, language, ai_mode):
 
-    try:
+    service = AIService()
 
-        prompt = f"""
+    prompt = f"""
 
-        You are an expert marketing strategist.
+    You are an expert marketing strategist.
 
-        Generate:
+    Generate:
 
-        3 short captions
+    3 captions
 
-        3 hashtags
+    3 hashtags
 
-        2 marketing content ideas
+    2 ideas
 
-        for a {business} business.
+    Business:
+    {business}
 
-        Audience:
-        {audience}
+    Audience:
+    {audience}
 
-        Emotion:
-        {emotion}
+    Emotion:
+    {emotion}
 
-        Season:
-        {season}
+    Season:
+    {season}
 
-        Language Style:
-        {language}
+    Language:
+    {language}
 
-        AI Mode:
-        {ai_mode}
+    AI Mode:
+    {ai_mode}
 
-        If AI Mode is:
+    """
 
-        Creative:
-        Use imaginative and unique language.
-
-        Professional:
-        Use polished business-oriented language.
-
-        Minimal:
-        Keep captions very short and clean.
-
-        Viral:
-        Use hook-based high-engagement style.
-
-        Clearly separate:
-        Captions,
-        Hashtags,
-        and Ideas.
-
-        """
-
-        completion = client.chat.completions.create(
-            model="deepseek/deepseek-chat-v3-0324:free",
-            messages=[{"role": "user", "content": prompt}],
-        )
-
-        return completion.choices[0].message.content
-
-    except Exception:
-
-        return """
-
-Captions:
-1. Fresh flavors made for your perfect day.
-2. Experience premium quality and modern vibes.
-3. Taste something unforgettable today.
-
-Hashtags:
-#Marketing
-#ContentCreation
-#BrandGrowth
-
-Ideas:
-1. Create behind-the-scenes content.
-2. Show customer reactions and experiences.
-
-"""
-
-
-
+    return service.generate(prompt)
