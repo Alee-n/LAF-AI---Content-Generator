@@ -1,11 +1,16 @@
-from providers.openrouter_provider import OpenRouterProvider
+from providers.provider_factory import ProviderFactory
 
 
 class AIService:
 
-    def __init__(self):
+    def __init__(
+        self,
+        provider_name="openrouter"
+    ):
 
-        self.provider = OpenRouterProvider()
+        self.provider = ProviderFactory.get_provider(
+            provider_name
+        )
 
     def generate(self, prompt):
 

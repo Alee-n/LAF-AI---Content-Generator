@@ -2,20 +2,49 @@ from openai import OpenAI
 
 from config import Config
 
+from providers.base_provider import BaseProvider
 
-class OpenRouterProvider:
+from exceptions.provider_errors import AIProviderError
+
+
+class OpenRouterProvider(BaseProvider):
 
     def __init__(self):
 
         self.client = OpenAI(
-            base_url="https://openrouter.ai/api/v1", api_key=Config.OPENROUTER_API_KEY
+
+            base_url="https://openrouter.ai/api/v1",
+
+            api_key=Config.OPENROUTER_API_KEY
+
         )
 
     def generate(self, prompt):
 
-        completion = self.client.chat.completions.create(
-            model="deepseek/deepseek-chat-v3-0324:free",
-            messages=[{"role": "user", "content": prompt}],
-        )
+        try:
 
-        return completion.choices[0].message.content
+            completion = self.client.chat.completions.create(
+
+                model="deepseek/deepseek-chat-v3-0324:free",
+
+                messages=[
+
+                    {
+
+                        "role": "user",
+
+                        "content": prompt
+
+                    }
+
+                ]
+
+            )
+
+            return completion.choices[0].message.content
+
+        except Exception as e:
+
+            raise AIProviderError(
+                f"OpenRouter Error: {str(e)}"
+            )

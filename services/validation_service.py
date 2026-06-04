@@ -1,26 +1,18 @@
-ALLOWED_BUSINESSES = ["bakery", "restaurant", "travel", "convenience store"]
-
-ALLOWED_AI_MODES = ["Creative", "Professional", "Minimal", "Viral"]
-
-ALLOWED_LANGUAGES = ["English", "Japanese"]
+from constants.business_types import VALID_BUSINESSES
+from constants.languages import VALID_LANGUAGES
+from constants.ai_modes import VALID_AI_MODES
 
 
 def validate_business(business):
 
-    if not business:
-
-        return False
-
-    return business.strip().lower() in ALLOWED_BUSINESSES
-
-
-def validate_ai_mode(ai_mode):
-
-    return ai_mode in ALLOWED_AI_MODES
+    return business in VALID_BUSINESSES
 
 
 def validate_language(language):
 
-    valid_languages = ["English", "Japanese Style"]
+    return language in VALID_LANGUAGES
 
-    return language in valid_languages
+
+def validate_ai_mode(ai_mode):
+
+    return ai_mode in VALID_AI_MODES
