@@ -9,3 +9,7 @@
 2026-06-02 13:58:39,908 | ERROR | Error | Error code: 404 - {'error': {'message': 'No endpoints found for deepseek/deepseek-chat-v3-0324:free.', 'code': 404}, 'user_id': 'user_2yXpM91ORMk2OPXnad3Yikiy6J7'}
 2026-06-02 15:22:51,121 | INFO | Generation | Business=travel | Mode=Minimal
 2026-06-02 15:22:53,042 | ERROR | Error | Error code: 404 - {'error': {'message': 'No endpoints found for deepseek/deepseek-chat-v3-0324:free.', 'code': 404}, 'user_id': 'user_2yXpM91ORMk2OPXnad3Yikiy6J7'}
+2026-06-04 17:11:21,606 | INFO | Generation | Business=travel | Mode=Minimal
+2026-06-04 17:11:27,655 | ERROR | Error | RetryError[<Future at 0x1e5aa1842d0 state=finished raised AIProviderError>]
+2026-06-04 17:12:07,858 | INFO | Generation | Business=travel | Mode=Creative
+2026-06-04 17:12:12,672 | ERROR | Error | RetryError[<Future at 0x1e5a9f66e70 state=finished raised AIProviderError>]

@@ -12,6 +12,12 @@
         filename='style.css'
     ) }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -260,6 +266,24 @@
         Generated Content
     </h2>
 
+    {% if not result %}
+
+        <div class="empty-state">
+
+            <h3>
+                Generate AI-Powered Content
+            </h3>
+
+            <p>
+
+                Captions, hashtags, and content ideas will appear here.
+
+            </p>
+
+        </div>
+
+    {% endif %}
+
     {% if result %}
 
     <!-- CAPTIONS -->
@@ -423,6 +447,12 @@
         filename='script.js'
     ) }}">
     </script>
+
+    <footer class="footer">
+
+    LAF AI • Built with Flask + OpenRouter
+
+</footer>
 
 </body>
 

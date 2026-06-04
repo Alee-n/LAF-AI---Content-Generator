@@ -15,7 +15,7 @@
 
 body{
 
-    font-family: Inter, Segoe UI, sans-serif;
+    font-family: "Inter", sans-serif;
 
     background: var(--bg);
 
@@ -347,4 +347,72 @@ button:hover{
     color: #ef4444;
 
     margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+
+        flex-direction: column;
+
+        padding: 20px;
+
+    }
+
+    .card {
+
+        width: 100%;
+
+    }
+
+    select,
+    button {
+
+        width: 100%;
+
+    }
+
+}
+
+.footer {
+
+    text-align: center;
+
+    margin-top: 60px;
+
+    padding: 20px;
+
+    color: #888;
+
+    font-size: 14px;
+
+}
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+    color: #888;
+
+    border: 1px dashed #ddd;
+
+    border-radius: 12px;
+
+    background: #fafafa;
+
+    margin: 20px auto;
+
+    width: 65%;
+}
+
+.loader {
+
+    margin-top: 20px;
+
+    color: #aaa;
+
+    font-size: 15px;
+
 }
