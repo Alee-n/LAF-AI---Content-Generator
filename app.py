@@ -111,6 +111,8 @@ def home():
 
                 result = ai_result.to_dict()
 
+                result["source"] = "ai"
+
             except Exception as e:
 
                 log_error(str(e))
@@ -120,6 +122,8 @@ def home():
                 result = generate_dynamic_content(business)
 
                 result = process_content(result, language, audience, season, emotion)
+
+                result["source"] = "fallback"
 
             # PLATFORM TIPS
 
